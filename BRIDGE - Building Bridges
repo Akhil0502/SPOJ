@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	int t;
+	scanf("%d",&t);
+	while(t--) {
+		int n,temp;
+		scanf("%d",&n);
+		vector<pair<int,int>> x;
+		vector<int> b;
+		for(int i = 0; i < n; ++i) {
+			scanf("%d", &temp);
+			x.push_back(make_pair(temp, 0));
+		}
+		for(int i = 0; i < n; ++i) {
+			scanf("%d", &temp);
+			x[i].second = temp;
+		}
+		sort(x.begin(), x.end());
+		for(int i = 0; i < n; ++i){
+			b.push_back(1);
+			for(int j = 0; j < i; ++j)
+				if(x[i].second >= x[j].second)
+					b[i] = max(b[i], b[j]+1);
+		}
+		int max_b = 0;
+
+		for(auto t : b) {
+			if(t > max_b)
+				max_b = t;
+		}
+
+		printf("%d\n",max_b);
+
+	}
+	return 0;
+}
