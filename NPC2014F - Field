@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int n,a,q;
+	string s;
+	char c;
+	vector<int> pat(26,0);
+	vector<int> check(26,0);
+	cin>>n>>s>>q;
+	for(int i=0;i<q;i++){
+		cin>>a>>c;
+		pat[c-'a']=a;
+	}
+	int  l=0,r=0,count=0,m_count=INT_MAX;
+	while(l<n && r<n){
+			check [ s[r] -'a' ]++;
+			if(check[ s[r] -'a' ]  == pat[ s[r] -'a' ] ){
+				count++;
+			}
+			if(count == q){
+				while(check[s[l] -'a' ] > pat[s[l] -'a' ]){
+					l++;
+					check[s[l-1] -'a' ]--;
+				}
+				m_count=min(m_count,r-l+1);
+			}
+			r++; 
+		
+	}
+	
+	if(m_count!=INT_MAX)
+    cout<<m_count;
+    else
+    cout<<"Andy rapopo";
+
+	return 0;
+
+}
