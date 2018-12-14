@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	long long n,m,index=0,mn=LONG_MAX;cin>>n>>m;
+	vector<pair<long long,long long> > data(n*m);
+	for(long long i=0;i<n;i++){
+		for(long long j=0;j<m;j++){
+			cin>>data[index].first;
+			data[index].second = i+1;
+			index++;
+		}
+	}
+	sort(data.begin(),data.end());
+	long long count=1,i=0,j=0;
+	map<long long,long long> Map;
+	Map[data[0].second]++;
+	while(i<data.size() && j<data.size()){		
+		if(count == n){
+			mn=min(mn,data[i].first - data[j].first );
+			j++;
+			Map[data[j-1].second ] --;
+			if( Map[ data[j-1].second ] == 0) count--;
+		}
+		else {
+			i++;
+			if(i==data.size() ) break;
+			Map[data[i].second] ++ ;
+			if(Map[data[i].second ] == 1 ){
+				count++;
+			}
+		}
+	}
+	cout<<mn<<endl;
+
+
+	return 0;
+}
+
