@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n,m,s=0,i,m_sum=0,j=0;
+map<int,int> Map;
+
+int main() {
+	cin>>n>>m;
+	vector<int> data(n);
+	for( i=0;i<n;i++)cin>>data[i];
+	for(i=0;i<n;i++){
+		s+=data[i];
+		if(s<=m && s>m_sum){
+			m_sum=s;
+		}
+		while(s>m){
+			s-=data[j];j++;
+		}
+		if(s<=m && s>m_sum)m_sum=s;
+	}
+	cout<<m_sum<<endl;
+	return 0;
+}
